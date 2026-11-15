@@ -9,7 +9,7 @@ namespace eCommerce.Core.Validator
         public LoginRequestValidator()
         {
             RuleFor(temp => temp.Email)
-                .NotEmpty().WithMessage("Email is required.")
+                .NotEmpty().WithMessage("Please Enter EmailID.")
                 .EmailAddress().WithMessage("Invalid email address.");
 
             RuleFor(temp => temp.Password)
