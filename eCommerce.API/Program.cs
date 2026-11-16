@@ -30,15 +30,35 @@ builder.Services.AddAutoMapper(
 
 //FluentValidation
 builder.Services.AddFluentValidationAutoValidation();
-builder.Services.AddValidatorsFromAssemblyContaining<LoginRequestValidator>();
+
+//Add API Explorer service 
+builder.Services.AddEndpointsApiExplorer();
+//Add swagger generation services to create
+//swagger specification
+builder.Services.AddSwaggerGen();
+// Configure CORS to allow the Angular application running at
+// http://localhost:4200 to access the ASP.NET Core Web API.
+builder.Services.AddCors(options =>
+{
+    options.AddDefaultPolicy(builder => {
+        builder.WithOrigins("http://localhost:4200").AllowAnyMethod().AllowAnyHeader();
+    });
+});
+
 
 //build the web application
 var app = builder.Build();
 app.UseExceptionHandlingMiddlewares();
 //Routing
 app.UseRouting();
+//add end points that can serve the Swagger.json
+app.UseSwagger();
+//add Swagger UI (Interactive page to explore and test api endpoints)
+app.UseSwaggerUI();
+app.UseCors();
+
 //Auth
-app.UseAuthorization();
+app.UseAuthentication();
 app.UseAuthorization();
 //Controller Route
 app.MapControllers();

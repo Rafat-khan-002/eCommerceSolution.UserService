@@ -10,7 +10,7 @@ namespace eCommerce.Core.Validator
         {
             RuleFor(temp => temp.Email)
                 .NotEmpty().WithMessage("Please Enter EmailID.")
-                .EmailAddress().WithMessage("Invalid email address.");
+                .EmailAddress().WithMessage("Please Enter EmailID.");
 
             RuleFor(temp => temp.Password)
                 .NotEmpty().WithMessage("Password is required.")
